@@ -18,4 +18,4 @@ jobs:
       - run: sudo apt install -y libqwt-qt5-6 libqwt-qt5-dev
       - run: sudo apt install -y libarmadillo-dev libarmadillo10
       - run: qmake
-      - run: make
+      - run: make -j4
