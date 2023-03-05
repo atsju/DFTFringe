@@ -88,7 +88,7 @@ jobs:
         run: aqt install-qt linux desktop 5.15.2 gcc_64 --archives qtbase qtsvg
       - name: qmake
         if: steps.cache-QWT.outputs.cache-hit != 'true'
-        run: cd qwt-6.1.6 ; ..\5.15.2\gcc_64\bin\qmake.exe
+        run: cd qwt-6.1.6 ; ../5.15.2/gcc_64/bin/qmake
       - name: build
         if: steps.cache-QWT.outputs.cache-hit != 'true'
         run: cd qwt-6.1.6 ; make -j4
@@ -121,7 +121,6 @@ jobs:
       - name: extract archive
         if: steps.cache-armadillo.outputs.cache-hit != 'true'
         run: 7z x -so armadillo-11.4.4.tar.xz | 7z x -si -ttar
-        shell: cmd
       - name: cmake generate
         if: steps.cache-armadillo.outputs.cache-hit != 'true'
         run: cmake -G "Unix Makefiles" -S armadillo-11.4.4 -B build_armadillo
@@ -215,7 +214,7 @@ jobs:
         with: 
           path: 'DFTFringe'
 
-      - run: cd DFTFringe ; ..\5.15.2\gcc_64\bin\qmake.exe
+      - run: cd DFTFringe ; ../5.15.2/gcc_64/bin/qmake.exe
       - run: cd DFTFringe ; make -j4
       #- name: copy needed dlls
       #  run: |
