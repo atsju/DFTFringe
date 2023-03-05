@@ -53,7 +53,8 @@ jobs:
         run: cmake --build ./build_openCV -j4
       - name: cmake install
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: cmake --install ./build_openCV
+        run: sudo cmake --install ./build_openCV
+        # TODO this is only a test to see if sudo has access
 
   build-QWT:
     runs-on: ubuntu-latest
