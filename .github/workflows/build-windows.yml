@@ -1,3 +1,5 @@
+I want this to fail
+
 name: build-windows
 on:
   push:

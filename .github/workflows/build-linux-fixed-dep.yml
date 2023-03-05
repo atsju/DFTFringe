@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-openCV-with-QT:
-    runs-on: windoubuntuws-latest
+    runs-on: ubuntu-latest
     steps:
       # this will restore/cache everything depending on cache hit/miss
       - name: Cache QT and openCV

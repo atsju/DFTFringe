@@ -1,3 +1,5 @@
+i want this to fail
+
 name: build-linux
 on:
   push:
