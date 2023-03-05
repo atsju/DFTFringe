@@ -1,0 +1,56 @@
+name: build-linux-fixed-dep
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-openCV-with-QT:
+    runs-on: windoubuntuws-latest
+    steps:
+      # this will restore/cache everything depending on cache hit/miss
+      - name: Cache QT and openCV
+        uses: actions/cache/@v3
+        id: cache-openCV-QT
+        with:
+          path: |
+            build_openCV\install\x64\mingw\bin\*.dll
+            build_openCV\install\include\*
+            5.15.2\gcc_64\bin\*
+            5.15.2\gcc_64\include\*
+            5.15.2\gcc_64\lib\*
+            5.15.2\gcc_64\mkspecs\*
+            5.15.2\gcc_64\plugins\platforms\*
+            5.15.2\gcc_64\plugins\imageformats\*
+          key: ${{ runner.os }}-openCV-4.6.0-QT-5.15.2
+
+      #- name: add minGW to path
+      #  if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+      #  shell: bash
+      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      - name: install aqtinstall tool
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: pip install aqtinstall
+      - name: install QT
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: aqt install-qt linux desktop 5.15.2 gcc_64 -m qtcharts qtdatavis3d
+      - uses: actions/checkout@v3
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        with: 
+          repository: 'opencv/opencv'
+          ref: '4.6.0'
+          path: './openCV'
+      - name: cmake generate
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: cmake -G "Unix Makefiles" -S openCV -B build_openCV -D WITH_QT=ON -D WITH_OPENGL=ON -D Qt5_DIR=:./5.15.2/mingw81_64/lib/cmake/Qt5
+      - name: cmake generate again
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: cmake -G "Unix Makefiles" -S openCV -B build_openCV
+      - name: cmake build
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: cmake --build ./build_openCV -j4
+      - name: cmake install
+        if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
+        run: cmake --install ./build_openCV
