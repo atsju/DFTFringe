@@ -75,7 +75,7 @@ jobs:
       #  shell: bash
       #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
       - name: install openGl libs
-        run: apt install libgl-dev 
+        run: sudo apt install libgl-dev 
       - name: download QWT
         if: steps.cache-QWT.outputs.cache-hit != 'true'
         # I specified the mirror because one of the random mirrors did not work during my tests
