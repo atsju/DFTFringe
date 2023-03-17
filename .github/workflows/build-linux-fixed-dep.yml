@@ -216,6 +216,6 @@ jobs:
         with: 
           path: 'DFTFringe'
 
-      - run: cd DFTFringe ; ../5.15.2/gcc_64/bin/qmake.exe
+      - run: cd DFTFringe ; ../5.15.2/gcc_64/bin/qmake
       - run: cd DFTFringe ; make -j4
       # TODO make an installer and upload artifact
