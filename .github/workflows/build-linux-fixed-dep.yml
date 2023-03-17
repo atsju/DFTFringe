@@ -16,20 +16,20 @@ jobs:
         id: cache-openCV-QT
         with:
           path: |
-            build_openCV\install\lib\*
-            build_openCV\install\include\*
-            5.15.2\gcc_64\bin\*
-            5.15.2\gcc_64\include\*
-            5.15.2\gcc_64\lib\*
-            5.15.2\gcc_64\mkspecs\*
-            5.15.2\gcc_64\plugins\platforms\*
-            5.15.2\gcc_64\plugins\imageformats\*
+            build_openCV/install/lib/*
+            build_openCV/install/include/*
+            5.15.2/gcc_64/bin/*
+            5.15.2/gcc_64/include/*
+            5.15.2/gcc_64/lib/*
+            5.15.2/gcc_64/mkspecs/*
+            5.15.2/gcc_64/plugins/platforms/*
+            5.15.2/gcc_64/plugins/imageformats/*
           key: ${{ runner.os }}-openCV-4.6.0-QT-5.15.2
 
       #- name: add minGW to path
       #  if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
       #  shell: bash
-      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      #  run: echo "${{github.workspace}}/Tools/mingw810_64/bin" >> $GITHUB_PATH
       - name: install aqtinstall tool
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
         run: pip install aqtinstall
@@ -64,15 +64,15 @@ jobs:
         id: cache-QWT
         with:
           path: |
-            qwt-6.1.6\src
-            qwt-6.1.6\lib\*
+            qwt-6.1.6/src
+            qwt-6.1.6/lib/*
           key: ${{ runner.os }}-QWT-6.1.6
 
       # all what follows is only run on cache miss
       #- name: add minGW to path
       #  if: steps.cache-QWT.outputs.cache-hit != 'true'
       #  shell: bash
-      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      #  run: echo "${{github.workspace}}/Tools/mingw810_64/bin" >> $GITHUB_PATH
       - name: install openGl libs
         run: sudo apt install libgl-dev 
       - name: download QWT
@@ -104,15 +104,15 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            build_armadillo\libarmadillo.*
-            build_armadillo\tmp\include
+            build_armadillo/libarmadillo.*
+            build_armadillo/tmp/include
           key: ${{ runner.os }}-armadillo-11.4.0
 
       # all what follows is only run on cache miss
       #- name: add minGW to path
       #  if: steps.cache-armadillo.outputs.cache-hit != 'true'
       #  shell: bash
-      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      #  run: echo "${{github.workspace}}/Tools/mingw810_64/bin" >> $GITHUB_PATH
       - name: download armadillo
         if: steps.cache-armadillo.outputs.cache-hit != 'true'
         # I specified the mirror because one of the random mirrors did not work during my tests
@@ -139,15 +139,15 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            build_lapack\lib\liblapack.a
-            build_lapack\lib\libblas.a
+            build_lapack/lib/liblapack.a
+            build_lapack/lib/libblas.a
           key: ${{ runner.os }}-lapack-3.11.0
 
       # all what follows is only run on cache miss
       #- name: add minGW to path
       #  if: steps.cache-lapack.outputs.cache-hit != 'true'
       #  shell: bash
-      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      #  run: echo "${{github.workspace}}/Tools/mingw810_64/bin" >> $GITHUB_PATH
       - uses: actions/checkout@v3 
         if: steps.cache-lapack.outputs.cache-hit != 'true'
         with: 
@@ -168,14 +168,14 @@ jobs:
     steps:
       #- name: add minGW to path
       #  shell: bash
-      #  run: echo "${{github.workspace}}\Tools\mingw810_64\bin" >> $GITHUB_PATH
+      #  run: echo "${{github.workspace}}/Tools/mingw810_64/bin" >> $GITHUB_PATH
       # restore cached lapack
       - uses: actions/cache/restore@v3
         id: cache-lapack
         with:
           path: |
-            build_lapack\lib\liblapack.a
-            build_lapack\lib\libblas.a
+            build_lapack/lib/liblapack.a
+            build_lapack/lib/libblas.a
           key: ${{ runner.os }}-lapack-3.11.0
           fail-on-cache-miss: true
       # restore cached armadillo
@@ -183,8 +183,8 @@ jobs:
         id: cache-armadillo
         with:
           path: |
-            build_armadillo\libarmadillo.*
-            build_armadillo\tmp\include
+            build_armadillo/libarmadillo.*
+            build_armadillo/tmp/include
           key: ${{ runner.os }}-armadillo-11.4.0
           fail-on-cache-miss: true
       # restore cached QWT
@@ -192,8 +192,8 @@ jobs:
         id: cache-QWT
         with:
           path: |
-            qwt-6.1.6\src
-            qwt-6.1.6\lib\*
+            qwt-6.1.6/src
+            qwt-6.1.6/lib/*
           key: ${{ runner.os }}-QWT-6.1.6
           fail-on-cache-miss: true
       # restore cached openCV and QT
@@ -201,14 +201,14 @@ jobs:
         id: cache-openCV-QT
         with:
           path: |
-            build_openCV\install\lib\*
-            build_openCV\install\include\*
-            5.15.2\gcc_64\bin\*
-            5.15.2\gcc_64\include\*
-            5.15.2\gcc_64\lib\*
-            5.15.2\gcc_64\mkspecs\*
-            5.15.2\gcc_64\plugins\platforms\*
-            5.15.2\gcc_64\plugins\imageformats\*
+            build_openCV/install/lib/*
+            build_openCV/install/include/*
+            5.15.2/gcc_64/bin/*
+            5.15.2/gcc_64/include/*
+            5.15.2/gcc_64/lib/*
+            5.15.2/gcc_64/mkspecs/*
+            5.15.2/gcc_64/plugins/platforms/*
+            5.15.2/gcc_64/plugins/imageformats/*
           key: ${{ runner.os }}-openCV-4.6.0-QT-5.15.2
           fail-on-cache-miss: true
       
