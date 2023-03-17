@@ -16,7 +16,7 @@ jobs:
         id: cache-openCV-QT
         with:
           path: |
-            build_openCV\install\x64\mingw\bin\*.dll
+            build_openCV\install\lib\*
             build_openCV\install\include\*
             5.15.2\gcc_64\bin\*
             5.15.2\gcc_64\include\*
@@ -53,8 +53,7 @@ jobs:
         run: cmake --build ./build_openCV -j4
       - name: cmake install
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: sudo cmake --install ./build_openCV
-        # TODO this is only a test to see if sudo has access
+        run: sudo cmake --install ./build_opencv --prefix ./build_opencv/install
 
   build-QWT:
     runs-on: ubuntu-latest
@@ -66,7 +65,7 @@ jobs:
         with:
           path: |
             qwt-6.1.6\src
-            qwt-6.1.6\lib\*.dll
+            qwt-6.1.6\lib\*
           key: ${{ runner.os }}-QWT-6.1.6
 
       # all what follows is only run on cache miss
@@ -105,7 +104,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            build_armadillo\libarmadillo.dll
+            build_armadillo\libarmadillo.*
             build_armadillo\tmp\include
           key: ${{ runner.os }}-armadillo-11.4.0
 
@@ -184,7 +183,7 @@ jobs:
         id: cache-armadillo
         with:
           path: |
-            build_armadillo\libarmadillo.dll
+            build_armadillo\libarmadillo.*
             build_armadillo\tmp\include
           key: ${{ runner.os }}-armadillo-11.4.0
           fail-on-cache-miss: true
@@ -194,7 +193,7 @@ jobs:
         with:
           path: |
             qwt-6.1.6\src
-            qwt-6.1.6\lib\*.dll
+            qwt-6.1.6\lib\*
           key: ${{ runner.os }}-QWT-6.1.6
           fail-on-cache-miss: true
       # restore cached openCV and QT
@@ -202,7 +201,7 @@ jobs:
         id: cache-openCV-QT
         with:
           path: |
-            build_openCV\install\x64\mingw\bin\*.dll
+            build_openCV\install\lib\*
             build_openCV\install\include\*
             5.15.2\gcc_64\bin\*
             5.15.2\gcc_64\include\*
@@ -219,41 +218,4 @@ jobs:
 
       - run: cd DFTFringe ; ../5.15.2/gcc_64/bin/qmake.exe
       - run: cd DFTFringe ; make -j4
-      #- name: copy needed dlls
-      #  run: |
-      #    mkdir artifactFolder
-      #    Copy-Item DFTFringe\res -Destination artifactFolder\res -Recurse
-      #    Copy-Item DFTFringe\ColorMaps -Destination artifactFolder\ColorMaps -Recurse
-      #    Copy-Item DFTFringe\release\DFTFringe.exe -Destination artifactFolder
-      #    mkdir artifactFolder\platforms
-      #    Copy-Item 5.15.2\mingw81_64\plugins\platforms\qwindows.dll -Destination artifactFolder\platforms
-      #    Copy-Item 5.15.2\mingw81_64\plugins\imageformats -Destination artifactFolder\imageformats -Recurse
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_calib3d460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_core460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_features2d460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_flann460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_highgui460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_imgcodecs460.dll -Destination artifactFolder
-      #    Copy-Item build_openCV\install\x64\mingw\bin\libopencv_imgproc460.dll -Destination artifactFolder
-      #    Copy-Item qwt-6.1.6\lib\qwt.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Charts.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Core.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5DataVisualization.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Gui.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Network.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5PrintSupport.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Widgets.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\libgcc_s_seh-1.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\libstdc++-6.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\libwinpthread-1.dll -Destination artifactFolder
-      #    Copy-Item Tools\mingw810_64\bin\libquadmath-0.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5OpenGL.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\QT5Test.dll -Destination artifactFolder
-      #    Copy-Item 5.15.2\mingw81_64\bin\Qt5Svg.dll -Destination artifactFolder
-#
-      #- name: Upload Artifact
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: DFTFringe-build-artifact
-      #    path: |
-      #      artifactFolder
+      # TODO make an installer and upload artifact
