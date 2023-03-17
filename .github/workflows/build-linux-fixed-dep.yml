@@ -53,7 +53,7 @@ jobs:
         run: cmake --build ./build_openCV -j4
       - name: cmake install
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: sudo cmake --install ./build_opencv --prefix ./build_opencv/install
+        run: sudo cmake --install ./build_openCV --prefix ./build_openCV/install
 
   build-QWT:
     runs-on: ubuntu-latest
