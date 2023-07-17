@@ -83,4 +83,6 @@ signals:
 public slots:
 };
 
+//test 
+
 #endif // WFTSTATS_H
