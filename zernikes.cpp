@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QString>
 #include "zernikeprocess.h"
+// one comment line
 
 void dump_matrix (double *a, int nrows, int ncols,const char *desc)
 {
