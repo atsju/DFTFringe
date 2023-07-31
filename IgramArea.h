@@ -75,7 +75,6 @@
 #include <QTimer>
 #include <QVideoWidget>
 #include <QMediaPlayer>
-#include <QMediaPlaylist>
 #include <QScrollArea>
 #include "settingsigram.h"
 #include <QDockWidget>
