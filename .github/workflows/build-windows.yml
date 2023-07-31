@@ -13,7 +13,7 @@ env:
   openCV_version: 4.6.0
   QT_version: 6.5.2
   lapack_version: 3.11.0
-  mingw_version: 810
+  mingw_version: 1120 # warning : still need manual tweek as 900 corresponds to version 11.2.0
 
 jobs:
   cache-mingw-from-QT:
@@ -33,7 +33,8 @@ jobs:
         run: pip install aqtinstall
       - name: install correct minGW version
         if: steps.cache-minGW.outputs.cache-hit != 'true'
-        run: aqt install-tool windows desktop tools_mingw qt.tools.win64_mingw${{env.mingw_version}}
+        # mingw900 is actually 11.2.0
+        run: aqt install-tool windows desktop tools_mingw90 qt.tools.win64_mingw900 
         # path is Tools\mingw${{env.mingw_version}}_64\bin\
       - name: install QT installer framework
         if: steps.cache-minGW.outputs.cache-hit != 'true'
@@ -79,7 +80,7 @@ jobs:
         run: pip install aqtinstall
       - name: install QT
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw -m qtcharts qtdatavis3d
+        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw -m qtcharts qtdatavis3d qtmultimedia
       - uses: actions/checkout@v3
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
         with:

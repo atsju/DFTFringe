@@ -17,7 +17,7 @@ QT += charts concurrent core datavisualization gui multimedia multimediawidgets 
 
 qtHaveModule(printsupport): QT += printsupport
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++17
 
 # Below are the three platform specific project configurations for WINDOWS, LINUX and MAC
 
