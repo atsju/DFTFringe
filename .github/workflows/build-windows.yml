@@ -11,7 +11,7 @@ env:
   armadillo_version: 12.6.1
   QWT_version: 6.1.6
   openCV_version: 4.6.0
-  QT_version: 5.15.2
+  QT_version: 6.5.2
   lapack_version: 3.11.0
   mingw_version: 810
 
@@ -52,12 +52,12 @@ jobs:
           path: |
             build_openCV\install\x64\mingw\bin\*.dll
             build_openCV\install\include\*
-            ${{env.QT_version}}\mingw81_64\bin\*
-            ${{env.QT_version}}\mingw81_64\include\*
-            ${{env.QT_version}}\mingw81_64\lib\*
-            ${{env.QT_version}}\mingw81_64\mkspecs\*
-            ${{env.QT_version}}\mingw81_64\plugins\platforms\*
-            ${{env.QT_version}}\mingw81_64\plugins\imageformats\*
+            ${{env.QT_version}}\mingw_64\bin\*
+            ${{env.QT_version}}\mingw_64\include\*
+            ${{env.QT_version}}\mingw_64\lib\*
+            ${{env.QT_version}}\mingw_64\mkspecs\*
+            ${{env.QT_version}}\mingw_64\plugins\platforms\*
+            ${{env.QT_version}}\mingw_64\plugins\imageformats\*
           key: ${{ runner.os }}-openCV-${{env.openCV_version}}-QT-${{env.QT_version}}
 
       # all what follows is only run on cache miss
@@ -79,7 +79,7 @@ jobs:
         run: pip install aqtinstall
       - name: install QT
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw81 -m qtcharts qtdatavis3d
+        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw -m qtcharts qtdatavis3d
       - uses: actions/checkout@v3
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
         with:
@@ -88,7 +88,7 @@ jobs:
           path: './openCV'
       - name: cmake generate
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
-        run: cmake -G "MinGW Makefiles" -S openCV -B build_openCV -D WITH_QT=ON -D WITH_OPENGL=ON -D Qt5_DIR=:./${{env.QT_version}}/mingw81_64/lib/cmake/Qt5
+        run: cmake -G "MinGW Makefiles" -S openCV -B build_openCV -D WITH_QT=ON -D WITH_OPENGL=ON -D Qt6_DIR=:./${{env.QT_version}}/mingw_64/lib/cmake/Qt6
       - name: cmake generate again
         if: steps.cache-openCV-QT.outputs.cache-hit != 'true'
         run: cmake -G "MinGW Makefiles" -S openCV -B build_openCV
@@ -142,10 +142,10 @@ jobs:
         run: pip install aqtinstall
       - name: install qmake
         if: steps.cache-QWT.outputs.cache-hit != 'true'
-        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw81 --archives qtbase qtsvg
+        run: aqt install-qt windows desktop ${{env.QT_version}} win64_mingw --archives qtbase qtsvg
       - name: qmake
         if: steps.cache-QWT.outputs.cache-hit != 'true'
-        run: cd qwt-${{env.QWT_version}} ; ..\${{env.QT_version}}\mingw81_64\bin\qmake.exe
+        run: cd qwt-${{env.QWT_version}} ; ..\${{env.QT_version}}\mingw_64\bin\qmake.exe
       - name: build
         if: steps.cache-QWT.outputs.cache-hit != 'true'
         run: cd qwt-${{env.QWT_version}} ; mingw32-make -j4
@@ -307,12 +307,12 @@ jobs:
           path: |
             build_openCV\install\x64\mingw\bin\*.dll
             build_openCV\install\include\*
-            ${{env.QT_version}}\mingw81_64\bin\*
-            ${{env.QT_version}}\mingw81_64\include\*
-            ${{env.QT_version}}\mingw81_64\lib\*
-            ${{env.QT_version}}\mingw81_64\mkspecs\*
-            ${{env.QT_version}}\mingw81_64\plugins\platforms\*
-            ${{env.QT_version}}\mingw81_64\plugins\imageformats\*
+            ${{env.QT_version}}\mingw_64\bin\*
+            ${{env.QT_version}}\mingw_64\include\*
+            ${{env.QT_version}}\mingw_64\lib\*
+            ${{env.QT_version}}\mingw_64\mkspecs\*
+            ${{env.QT_version}}\mingw_64\plugins\platforms\*
+            ${{env.QT_version}}\mingw_64\plugins\imageformats\*
           key: ${{ runner.os }}-openCV-${{env.openCV_version}}-QT-${{env.QT_version}}
           fail-on-cache-miss: true
 
@@ -354,7 +354,7 @@ jobs:
           echo "${{env.NOW}}"
           (Get-Content DFTFringe/DFTFringeInstaller/packages/com.githubdoe.DFTFringe/meta/package.xml).replace('MY_AUTOMATED_DATE_STRING', '${{env.NOW}}') | Set-Content DFTFringe/DFTFringeInstaller/packages/com.githubdoe.DFTFringe/meta/package.xml
           
-      - run: cd DFTFringe ; ..\${{env.QT_version}}\mingw81_64\bin\qmake.exe
+      - run: cd DFTFringe ; ..\${{env.QT_version}}\mingw_64\bin\qmake.exe
       #- run: echo "::add-matcher::.github/matcher/uic_matcher.json" # deactivate uic matcher for now to priorize GCC warnings
       - run: cd DFTFringe ; mingw32-make -j4
       #- run: echo "::remove-matcher owner=uic-problem-matcher::" # deactivate uic matcher for now to priorize GCC warnings
@@ -371,13 +371,13 @@ jobs:
           Copy-Item ".\build_openCV\install\x64\mingw\bin\libopencv_imgcodecs460.dll" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
           Copy-Item ".\build_openCV\install\x64\mingw\bin\libopencv_imgproc460.dll" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
           Copy-Item ".\qwt-${{env.QWT_version}}\lib\qwt.dll" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
-          Copy-Item ".\${{env.QT_version}}\mingw81_64\bin\Qt5OpenGL.dll" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
+          Copy-Item ".\${{env.QT_version}}\mingw_64\bin\Qt6OpenGL.dll" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
           Copy-Item ".\DFTFringe\ColorMaps" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\ColorMaps" -Recurse
           Copy-Item ".\DFTFringe\res" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\res" -Recurse
           Copy-Item ".\DFTFringe\RevisionHistory.html" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
 
       - name: automatically add QT dependencies with windeployqt
-        run: .\${{env.QT_version}}\mingw81_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe
+        run: .\${{env.QT_version}}\mingw_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe
 
       - name: make installer using QT installer framework
         run: Tools\QtInstallerFramework\4.6\bin\binarycreator.exe -c DFTFringe\DFTFringeInstaller\config\config.xml -p DFTFringe\DFTFringeInstaller\packages DFTFringeInstaller_${{env.WORKFLOW_VERSION}}
