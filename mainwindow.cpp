@@ -234,7 +234,6 @@ MainWindow::MainWindow(QWidget *parent) :
             continue;
         zernEnables[i] = false;
     }
-    zernEnableUpdateTime = QDateTime::currentDateTime().toTime_t();
 
     connect(m_surfaceManager, SIGNAL(rocChanged(double)),this, SLOT(rocChanged(double)));
     connect(m_mirrorDlg, SIGNAL(newPath(QString)),this, SLOT(newMirrorDlgPath(QString)));
@@ -280,7 +279,7 @@ void MainWindow::openWaveFrontonInit(QStringList args){
         if (pd.wasCanceled())
             break;
 
-        if (arg.toUpper().endsWith(".WFT")){
+        if (arg.endsWith(".wft", Qt::CaseInsensitive)){
             pd.setLabelText(arg);
             try {
             m_surfaceManager->loadWavefront(arg);
@@ -434,12 +433,12 @@ void MainWindow::on_actionLoad_Interferogram_triggered()
     ui->SelectObsOutline->setChecked(false);
     if (dialog.exec()){
         if (dialog.selectedFiles().size() == 1){
-            QFileInfo a(dialog.selectedFiles().first());
+            QFileInfo a(dialog.selectedFiles().constFirst());
             QString ext = a.completeSuffix();
             set.setValue("igramExt", ext);
             qDebug() << "suffix"<<ext;
 
-            loadFile(dialog.selectedFiles().first());
+            loadFile(dialog.selectedFiles().constFirst());
         }
         else{
             m_igramsToProcess = dialog.selectedFiles();
