@@ -226,7 +226,6 @@ void astigStatsDlg::plot(){
     ui->mPlot->insertLegend( l, QwtPlot::TopLegend );
     l->setDefaultItemMode( QwtLegendData::Checkable );
     connect(l, SIGNAL(checked(QVariant,bool,int)), this, SLOT(showItem(QVariant ,bool,int)));
-    int i = 0;
 
     //QMap<QString, QColor> colorAssign;
 
@@ -263,6 +262,7 @@ void astigStatsDlg::plot(){
         const int size = it.value().size();
         double *xAstig = new double[size];
         double *yAstig = new double[size];
+        size_t i = 0;
         RunningStat xstats, ystats;
 
         QColor color = QColor(Qt::GlobalColor( 7 + colorndx%12 ));
@@ -277,6 +277,7 @@ void astigStatsDlg::plot(){
             ymax = std::max(ymax, data.p.y());
             yAstig[i] = data.p.y();
             ystats.Push(yAstig[i]);
+            i++;
 
             // plot marker for the point
 
