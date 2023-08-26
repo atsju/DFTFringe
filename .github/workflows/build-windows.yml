@@ -388,10 +388,5 @@ jobs:
           name: DFTFringe-windows-build-artifact
           path: |
             DFTFringeInstaller_${{env.WORKFLOW_VERSION}}.exe
-
-      - name: Upload Artifact (debug symbols)
-        uses: actions/upload-artifact@v3
-        with:
-          name: DFTFringe-windows-build-artifact-debug-symbols
-          path: |
-            .\DFTFringe\Release\DFTFringe.exe.debug
+            DFTFringe\Release\DFTFringe.exe.debug
+      
