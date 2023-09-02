@@ -282,6 +282,7 @@ public:
     IgramArea *m_igramArea;
     DFTTools *m_dftTools;
     outlinePlots *m_outlinePlots;
+    foucaultView* m_fouclautViewTab;
 private:
     DFTArea *m_dftArea;
 

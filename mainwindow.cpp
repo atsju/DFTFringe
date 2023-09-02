@@ -172,6 +172,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Surface Manager
     m_surfaceManager = SurfaceManager::get_instance(this,m_surfTools, m_profilePlot, m_contourView,
                                           m_ogl->m_surface, metrics);
+    m_fouclautViewTab = new foucaultView(nullptr, m_surfaceManager);
     connect(m_contourView, SIGNAL(showAllContours()), m_surfaceManager, SLOT(showAllContours()));
     connect(m_dftArea, SIGNAL(newWavefront(cv::Mat,CircleOutline,CircleOutline,QString, QVector<std::vector<cv::Point> >)),
             m_surfaceManager, SLOT(createSurfaceFromPhaseMap(cv::Mat,CircleOutline,CircleOutline,QString, QVector<std::vector<cv::Point> >)));
@@ -181,7 +182,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->addTab(review, "Results");
 
     ui->tabWidget->addTab(SimulationsView::getInstance(ui->tabWidget), "Star Test, PSF, MTF");
-    ui->tabWidget->addTab(foucaultView::get_Instance(m_surfaceManager), "Ronchi & Foucault");
+    ui->tabWidget->addTab(m_fouclautViewTab, "Ronchi & Foucault");
     scrollArea->setWidgetResizable(true);
     scrollAreaDft->setWidgetResizable(true);
     createActions();
@@ -347,10 +348,8 @@ void MainWindow::mainTabChanged(int ndx){
     }
     case 4:
     {
-        foucaultView *fv = foucaultView::get_Instance();
-        if (fv->needsDrawing) {
-            fv->on_makePb_clicked();
-
+        if (m_fouclautViewTab->needsDrawing) {
+            m_fouclautViewTab->on_makePb_clicked();
         }
     }
         break;

@@ -693,7 +693,7 @@ void SurfaceManager::sendSurface(wavefront* wf){
     m_profilePlot->setSurface(wf);
     m_SurfaceGraph->setSurface(wf);
     m_simView->setSurface(wf);
-    foucaultView::get_Instance()->setSurface(wf);
+    ((MainWindow*)parent())->m_fouclautViewTab->setSurface(wf);
 
     QFile fn(wf->name);
     QFileInfo fileInfo(fn.fileName());
@@ -2904,7 +2904,7 @@ void SurfaceManager::report(){
     {
         int currentTab = ((MainWindow*)(parent()))->getCurrentTab();
         ((MainWindow*)(parent()))->setTab(4);
-        foucaultView *fv = foucaultView::get_Instance(0);
+        foucaultView *fv = ((MainWindow*)parent())->m_fouclautViewTab;
         fv->resize(finalWidth * 2., finalWidth * 2. );
         qApp->processEvents();
 

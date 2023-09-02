@@ -13,9 +13,10 @@ class foucaultView : public QWidget
     Q_OBJECT
 
 public:
-    static foucaultView *get_Instance(SurfaceManager *sm = 0);
-    foucaultView(const foucaultView&) = delete;
-    foucaultView& operator=(const foucaultView&) = delete;
+    explicit foucaultView(QWidget *parent = 0, SurfaceManager *sm = 0);
+    //static foucaultView *get_Instance(SurfaceManager *sm = 0);
+    //foucaultView(const foucaultView&) = delete;
+    //foucaultView& operator=(const foucaultView&) = delete;
     ~foucaultView();
 
     void setSurface(wavefront * wf);
@@ -92,7 +93,6 @@ private:
     wavefront *m_wf;
     int lateralOffset;
 
-    explicit foucaultView(QWidget *parent = 0, SurfaceManager *sm = 0);
     cv::Mat compute_star_test(int pupil_size, double defocus, double pad, bool use_OPD);
     double getStep();
     void draw_ROC_Scale();

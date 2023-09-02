@@ -37,10 +37,10 @@ foucaultView::foucaultView(QWidget *parent, SurfaceManager *sm) :
 
 
 
-foucaultView *foucaultView::get_Instance(SurfaceManager *sm){
-    static foucaultView m_instance{0, sm};
-    return &m_instance;
-}
+//foucaultView *foucaultView::get_Instance(SurfaceManager *sm){
+//    static foucaultView m_instance{0, sm};
+//    return &m_instance;
+//}
 
 foucaultView::~foucaultView()
 {
@@ -509,7 +509,7 @@ void foucaultView::on_scanPb_clicked()
     double step = ui->scanSteps->value();
     if (step == 0)
        step = .001;
-    foucaultView *fv = foucaultView::get_Instance(0);
+    foucaultView *fv = this;//foucaultView::get_Instance(0);
     int cnt = 0;
     QSettings settings;
     for (double v = start; v <= end; v += step){
