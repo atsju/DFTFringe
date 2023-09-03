@@ -3,7 +3,8 @@
 #include <QSettings>
 #include "myutils.h"
 
-ZernikeSmoothingDlg::ZernikeSmoothingDlg(wavefront &wf, QWidget *parent) :
+ZernikeSmoothingDlg::ZernikeSmoothingDlg(wavefront &wf, SurfaceManager *sm, QWidget *parent) :
+    m_sm(sm),
     QDialog(parent),
     ui(new Ui::ZernikeSmoothingDlg)
 {
@@ -24,8 +25,6 @@ ZernikeSmoothingDlg::ZernikeSmoothingDlg(wavefront &wf, QWidget *parent) :
     ui->termCnt->setText(QString("%1 Terms").arg(m_noOfTerms));
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(intiZernTable()));
     tableModel->setValues(&m_wf.InputZerns);
-    m_sm = SurfaceManager::get_instance();
-
 
     m_originalSize = wf.data.cols;
     m_xCen = wf.m_outside.m_center.x();

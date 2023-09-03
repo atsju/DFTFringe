@@ -473,12 +473,12 @@ cv::Mat SurfaceManager::computeWaveFrontFromZernikes(int wx, int wy, std::vector
     return result;
 }
 
-SurfaceManager *SurfaceManager::get_instance(QObject *parent, surfaceAnalysisTools *tools,
-                                             ProfilePlot *profilePlot, contourView *contourPlot,
-                                             SurfaceGraph *glPlot, metricsDisplay *mets){
-    static SurfaceManager m_instance{parent, tools, profilePlot, contourPlot, glPlot, mets};
-    return &m_instance;
-}
+//SurfaceManager *SurfaceManager::get_instance(QObject *parent, surfaceAnalysisTools *tools,
+//                                             ProfilePlot *profilePlot, contourView *contourPlot,
+//                                             SurfaceGraph *glPlot, metricsDisplay *mets){
+//    static SurfaceManager m_instance{parent, tools, profilePlot, contourPlot, glPlot, mets};
+//    return &m_instance;
+//}
 
 SurfaceManager::SurfaceManager(QObject *parent, surfaceAnalysisTools *tools,
                                ProfilePlot *profilePlot, contourView *contourView,
@@ -544,7 +544,9 @@ SurfaceManager::SurfaceManager(QObject *parent, surfaceAnalysisTools *tools,
 SurfaceManager::~SurfaceManager(){
     qDebug() << "SurfaceManager::~SurfaceManager";
     for(wavefront* wf : m_wavefronts){
+        qDebug() << "is it you ?";
         delete wf;
+        qDebug() << "no";
     }
 }
 
@@ -2968,7 +2970,7 @@ void SurfaceManager::transform(){
         QMessageBox::warning(0,"Warning","No wave fronts loaded.");
         return;
     }
-    TransformWaveFrontDlg dlg;
+    TransformWaveFrontDlg dlg(nullptr, this->getCurrent()->lambda);
     connect(&dlg, SIGNAL(flipLR()), this, SLOT(flipHorizontal()));
     connect(&dlg, SIGNAL(flipV()),this,   SLOT(flipVertical()));
     connect(&dlg, SIGNAL(resizeW(int)), this, SLOT(resizeW(int)));

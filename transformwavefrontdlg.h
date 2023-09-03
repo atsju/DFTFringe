@@ -12,7 +12,7 @@ class TransformWaveFrontDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit TransformWaveFrontDlg(QWidget *parent = 0);
+    explicit TransformWaveFrontDlg(QWidget *parent = 0, double wavelength = 650);
 
     ~TransformWaveFrontDlg();
 

@@ -38,8 +38,8 @@
 #include "surfacemanager.h"
 
 using namespace QtDataVisualization;
-OGLView::OGLView(QWidget *parent, ContourTools *m_tool) :
-    QWidget(parent), m_spinRate(5)
+OGLView::OGLView(SurfaceManager* &sm, QWidget *parent, ContourTools *m_tool) :
+    m_surfaceManager(sm), QWidget(parent), m_spinRate(5)
 {
 
     QSettings s;
@@ -174,7 +174,7 @@ void OGLView::showSelected()    // show all selected wavefronts as 3D plots
     QRect rec = QGuiApplication::primaryScreen()->geometry();
     int width = rec.width()/3;
     int height = rec.height()/2;
-    QVector<wavefront *>  m_wavefronts =SurfaceManager::get_instance()->m_wavefronts;
+    QVector<wavefront *>  m_wavefronts = m_surfaceManager->m_wavefronts;
     surfaceAnalysisTools *saTools = surfaceAnalysisTools::get_Instance();
     QList<int> list = saTools->SelectedWaveFronts();
     int cols = 4;
@@ -221,7 +221,7 @@ void OGLView::showSelected()    // show all selected wavefronts as 3D plots
     scrollArea->setBackgroundRole(QPalette::Dark);
     scrollArea->setAutoFillBackground(true);
     QPushButton *savePb = new QPushButton("Save as Image",w);
-    SurfaceManager *sm = SurfaceManager::get_instance();
+    SurfaceManager *sm = m_surfaceManager;
     connect(savePb, SIGNAL(pressed()), sm, SLOT(saveAllContours()));
     layout->addWidget(savePb,0,Qt::AlignHCenter);
     layout->addWidget(scrollArea);
@@ -231,7 +231,7 @@ void OGLView::showSelected()    // show all selected wavefronts as 3D plots
     height = 2 * rec.height()/3;
     width = rec.width();
     w->resize(width,height);
-    SurfaceManager::get_instance()->m_allContours = m_allContours;
+    m_surfaceManager->m_allContours = m_allContours;
     w->show();
     QApplication::restoreOverrideCursor();
 }

@@ -21,6 +21,7 @@
 #include <QWidget>
 #include "contourtools.h"
 #include "surfaceanalysistools.h"
+#include "surfacemanager.h"
 #include <QPushButton>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
@@ -34,7 +35,7 @@ class OGLView : public QWidget
     Surface3dControlsDlg *m_controls;
 public:
     QPushButton *m_fullScreenPb;
-    explicit OGLView(QWidget *parent = 0, ContourTools *m_tool = 0);
+    explicit OGLView(SurfaceManager* &sm, QWidget *parent = 0, ContourTools *m_tool = 0);
     ~OGLView();
     SurfaceGraph *m_surface;
     QCheckBox *fillCB;
@@ -48,6 +49,9 @@ public:
 
     QSize sizeHint() const;
     int m_spinRate;
+private:
+    SurfaceManager* &m_surfaceManager;
+public:
 signals:
     void fullScreen();
 public slots:

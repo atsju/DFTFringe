@@ -4,6 +4,9 @@
 #include <QWidget>
 #include "surfacemanager.h"
 #include <QTimer>
+#include "boost/stacktrace.hpp"
+#include "spdlog/spdlog.h"
+
 namespace Ui {
 class foucaultView;
 }

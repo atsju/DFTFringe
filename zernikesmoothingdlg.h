@@ -14,7 +14,7 @@ class ZernikeSmoothingDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit ZernikeSmoothingDlg(wavefront &wf, QWidget *parent = nullptr);
+    explicit ZernikeSmoothingDlg(wavefront &wf, SurfaceManager *sm, QWidget *parent = nullptr);
     ~ZernikeSmoothingDlg();
 
 private slots:

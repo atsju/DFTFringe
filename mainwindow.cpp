@@ -142,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_contourView = new contourView(this, m_contourTools);
     connect(m_contourView, SIGNAL(zoomMe(bool)),this, SLOT(zoomContour(bool)));
-    m_ogl = new OGLView(0, m_contourTools);
+    m_ogl = new OGLView(m_surfaceManager, 0, m_contourTools);
     connect(m_ogl, SIGNAL(fullScreen()), this, SLOT(zoomOgl()));
 
     connect(userMapDlg, SIGNAL(colorMapChanged(int)), m_contourView->getPlot(), SLOT(ContourMapColorChanged(int)));
@@ -170,7 +170,7 @@ MainWindow::MainWindow(QWidget *parent) :
     );
 
     //Surface Manager
-    m_surfaceManager = SurfaceManager::get_instance(this,m_surfTools, m_profilePlot, m_contourView,
+    m_surfaceManager = new SurfaceManager(this,m_surfTools, m_profilePlot, m_contourView,
                                           m_ogl->m_surface, metrics);
     m_fouclautViewTab = new foucaultView(nullptr, m_surfaceManager);
     connect(m_contourView, SIGNAL(showAllContours()), m_surfaceManager, SLOT(showAllContours()));
@@ -261,6 +261,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     openWaveFrontonInit(args);
 
+    this->dumpObjectTree();
+
 }
 int showmem(QString t);
 void MainWindow::openWaveFrontonInit(QStringList args){
@@ -312,7 +314,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 MainWindow::~MainWindow()
 {
-    qDebug() << "deleteing mainwindow";
+    qDebug() << "MainWindow::~MainWindow";
     delete m_colorChannels;
     delete m_intensityPlot;
     delete m_ogl;
@@ -1697,7 +1699,7 @@ void MainWindow::on_actionShow_outline_statistics_triggered()
 
     if (dialog.exec()) {
         QStringList fileNames = dialog.selectedFiles();
-        outlineStatsDlg outDlg(fileNames, this);
+        outlineStatsDlg outDlg(fileNames, m_surfaceManager, this);
         outDlg.exec();
         QFileInfo info(fileNames[0]);
         lastPath = info.absolutePath();
@@ -1776,12 +1778,12 @@ void MainWindow::on_actionProcess_PSI_interferograms_triggered()
 void MainWindow::on_actionSmooth_current_wave_front_triggered()
 {
 
-    SurfaceManager &sm = *SurfaceManager::get_instance();
+    SurfaceManager &sm = *m_surfaceManager;
     if (sm.m_wavefronts.size() == 0){
         QMessageBox::warning(this, "No Wavefronts", "You must first load a wave front");
         return;
     }
-    ZernikeSmoothingDlg *dlg = new ZernikeSmoothingDlg(*sm.m_wavefronts[sm.m_currentNdx]);
+    ZernikeSmoothingDlg *dlg = new ZernikeSmoothingDlg(*sm.m_wavefronts[sm.m_currentNdx], m_surfaceManager, nullptr);
     dlg->resize(1000,1000);
     dlg->show();
     return;

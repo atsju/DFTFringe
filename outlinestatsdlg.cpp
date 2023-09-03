@@ -96,9 +96,9 @@ QVector<int> radiusHisto(const QVector<double>& dataQVect, double *minRad, int &
     return h;
 }
 
-outlineStatsDlg::outlineStatsDlg(QStringList names, QWidget *parent) :
-    QDialog(parent), m_names(names),
-    ui(new Ui::outlineStatsDlg)
+outlineStatsDlg::outlineStatsDlg(QStringList names, SurfaceManager *sm, QWidget *parent) :
+    QDialog(parent), m_names(names), 
+    ui(new Ui::outlineStatsDlg), m_surfaceManager(sm)
 {
     ui->setupUi(this);
     ui->mirrorCenterPlot->setTitle("Mirror center Position x and y");
@@ -253,7 +253,7 @@ void outlineStatsDlg::on_pushButton_clicked()
                 selectThese[i].replace(".oln",".wft");
             }
             hide();
-            SurfaceManager::get_instance()->averageWavefrontFiles(selectThese);
+            m_surfaceManager->averageWavefrontFiles(selectThese);
             close();
             break;
         case outlineFilterAction::oFRESIZE:

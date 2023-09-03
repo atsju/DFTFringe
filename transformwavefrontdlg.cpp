@@ -3,13 +3,12 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "surfacemanager.h"
-TransformWaveFrontDlg::TransformWaveFrontDlg( QWidget *parent) :
+TransformWaveFrontDlg::TransformWaveFrontDlg( QWidget *parent, double wavelength) :
     QDialog(parent),
     ui(new Ui::TransformWaveFrontDlg)
 {
     ui->setupUi(this);
-    wavefront *wf = SurfaceManager::get_instance()->getCurrent();
-    ui->newWaveLength->setValue(wf->lambda);
+    ui->newWaveLength->setValue(wavelength);
 }
 
 TransformWaveFrontDlg::~TransformWaveFrontDlg()

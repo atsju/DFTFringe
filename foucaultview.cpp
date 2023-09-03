@@ -14,6 +14,8 @@ foucaultView::foucaultView(QWidget *parent, SurfaceManager *sm) :
     QWidget(parent),
     ui(new Ui::foucaultView), m_sm(sm), heightMultiply(1)
 {
+    spdlog::get("logger")->critical("foucaultView::foucaultView");
+    spdlog::get("logger")->critical(boost::stacktrace::to_string((boost::stacktrace::stacktrace())));   
     m_wf = 0;
     lateralOffset = 0;
     needsDrawing = false;
@@ -44,6 +46,8 @@ foucaultView::foucaultView(QWidget *parent, SurfaceManager *sm) :
 
 foucaultView::~foucaultView()
 {
+    spdlog::get("logger")->critical("foucaultView::~foucaultView");
+    spdlog::get("logger")->critical(boost::stacktrace::to_string((boost::stacktrace::stacktrace())));    
     delete ui;
     qDebug() << "foucaultView::~foucaultView";
 }
