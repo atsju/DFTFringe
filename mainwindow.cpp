@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_batchMakeSurfaceReady(false), m_astigStatsDlg(0), m_cameraCalibWizard(nullptr)
 {
     ui->setupUi(this);
-
+    ui->useAnnulust->hide();
     spdlog::get("logger")->info("DFTFringe {} started", APP_VERSION);
 
     //const QString toolButtonStyle("QToolButton {"
@@ -438,15 +438,18 @@ void MainWindow::on_actionLoad_Interferogram_triggered()
                           });
     dialog.setNameFilters(filters);
     ui->SelectObsOutline->setChecked(false);
+    ui->useAnnulust->hide();
     if (dialog.exec()){
         if (dialog.selectedFiles().size() == 1){
             loadFile(dialog.selectedFiles().first());
+
         }
         else{
             m_igramsToProcess = dialog.selectedFiles();
             Batch_Process_Interferograms();
         }
     }
+
 }
 
 void MainWindow::createActions()
@@ -525,11 +528,17 @@ void MainWindow::updateMetrics(wavefront& wf){
     st *= st;
     double Strehl = pow(e, -st);
     metrics->mStrehl->setText(QString("<b><FONT FONT SIZE = 12>%1</b>").arg(Strehl, 6, 'f', 3));
-
-
+    QString ztitle("Zernike Values");
+    if (m_mirrorDlg->m_useAnnular){
+        ztitle = QString("Annular Zernike values %1% center hole").arg(100 * m_mirrorDlg->m_annularObsPercent, 6, 'f',1);
+    }
+    metrics->setZernTitle(ztitle);
     double z8 = zernTablemodel->values[8];
     if (m_mirrorDlg->doNull && wf.useSANull){
+        Settings2 &settings = *Settings2::getInstance();
+
         BestSC = z8/m_mirrorDlg->z8;
+
     }
     else {
         BestSC = m_mirrorDlg->cc +z8/m_mirrorDlg->z8;
@@ -603,9 +612,7 @@ QStringList MainWindow::SelectWaveFrontFiles(){
     QSettings settings;
     QString lastPath = settings.value("lastPath",".").toString();
 
-    QFileDialog dialog(this);
-    dialog.setDirectory(lastPath);
-    dialog.setFileMode(QFileDialog::ExistingFiles);
+    QFileDialog dialog(this, "load wave front file", lastPath, tr("wft(*.wft)"));
     dialog.setNameFilter(tr("wft (*.wft)"));
 
     if (dialog.exec()) {
@@ -736,10 +743,12 @@ void MainWindow::on_SelectOutSideOutline_clicked(bool checked)
 {
     m_igramArea->SideOutLineActive( checked);
     m_regionsEdit->hide();
+    ui->useAnnulust->hide();
 }
 
 void MainWindow::on_SelectObsOutline_clicked(bool checked)
 {
+    ui->useAnnulust->show();
     m_igramArea->CenterOutlineActive(checked);
     m_regionsEdit->hide();
 }
@@ -1678,11 +1687,50 @@ void MainWindow::on_actionCreate_Movie_of_wavefronts_triggered()
 //    this->setCursor(Qt::ArrowCursor);
 
 }
-
+arma::mat zapm(const arma::vec& rho, const arma::vec& theta,
+               const double& eps, const int& maxorder=12) ;
+#include "armadillo"
+void dumpArma(arma::mat mm, QString title = "", QVector<QString> colHeading = QVector<QString>(0),
+              QVector<QString> RowLable = QVector<QString>(0));
 void MainWindow::on_actionDebugStuff_triggered()
 {
+    zernikeProcess *zp = zernikeProcess::get_Instance();
+    wavefront *wf = m_surfaceManager->m_wavefronts[m_surfaceManager->m_currentNdx];
 
-    //debugZernRoutines();
+
+    // compute annular defocus from circular value
+    double obs = 0.5;
+    double e = sqrt(1 + obs * obs);
+
+    double a4 = 1./ (1 - obs * obs) * (+ wf->InputZerns[3] - (std::sqrt(3)*obs*obs * wf->InputZerns[0] ));
+    qDebug() << "defocus circular" << wf->InputZerns[3] << "annular" << a4;
+    std::vector<double> rho = {1., 0., 1.};
+    std::vector<double> theta;
+
+    theta.push_back(M_PI);
+    theta.push_back(0.);
+    theta.push_back(0);
+
+    arma::rowvec r(rho);
+    arma::rowvec t(theta);
+
+   arma::Mat<double> rhoTheta = arma::join_cols(r,t);
+    int max =4;
+
+    qDebug() << "e" << e;
+   arma::mat zerns = zapm(r.as_col(), t.as_col(), obs, max);
+
+   dumpArma(zerns, "Y = 0 obs = .5  ", {"   X   ","piston","xTilt","yTilt", "defocus", "xastig", "yastig"},{"x = -1", "x = 0","x = 1"});
+   qDebug() << "dump done";
+
+
+  std::vector<double> zs =  zp->ZernFitWavefront(*wf);
+   for (int i = 0; i < 10; ++i){
+       qDebug() << "z " << i << zs[i] << wf->InputZerns[i];
+
+   }
+   return;
+
 }
 
 
@@ -1789,5 +1837,8 @@ void MainWindow::on_actionSmooth_current_wave_front_triggered()
     return;
 }
 
-
+void MainWindow::on_useAnnulust_clicked()
+{
+    m_igramArea->useAnnulusforCenterOutine();
+}
 
