@@ -21,4 +21,4 @@ jobs:
       # ignore noisy dirs from QT files itself
       # all level 1 checks but ignore clazy-no-connect-by-name
       # no parallel make with clazy to not mess log
-      - run: export CLAZY_IGNORE_DIRS=.*usr.* && export CLAZY_CHECKS="level1,no-connect-by-name" && make
+      - run: export CLAZY_IGNORE_DIRS=.*usr.* && export CLAZY_CHECKS="qt6-deprecated-api-fixes,qt6-header-fixes,qt6-qhash-signature,qt6-fwd-fixes,missing-qobject-macro" && make
