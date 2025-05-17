@@ -30,7 +30,7 @@ extern int Zw[];
 extern double BestSC;
 double zernike(int n, double x, double y);
 void gauss_jordan(int n, double* Am, double* Bm);
-void ZernikeSmooth(Mat wf, Mat mask);
+void ZernikeSmooth(cv::Mat wf, cv::Mat mask);
 
 typedef struct  {
     std::vector<bool> enables;

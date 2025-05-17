@@ -39,7 +39,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtCore/qmath.h>
 
-using namespace QtDataVisualization;
+//using namespace QtDataVisualization;
 
 
 

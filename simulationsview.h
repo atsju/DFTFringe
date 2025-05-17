@@ -24,7 +24,7 @@
 #include <QTimer>
 #include <QtDataVisualization/Q3DSurface>
 class arcSecScaleDraw;
-using namespace QtDataVisualization;
+//using namespace QtDataVisualization;
 namespace Ui {
 class SimulationsView;
 }

@@ -2,7 +2,7 @@
 #include "ui_outlinedialog.h"
 #include <QSettings>
 #include <QDebug>
-#include <QDesktopWidget>
+//#include <QDesktopWidget>
 #include <QMessageBox>
 #include <QShortcut>
 #include <QMouseEvent>

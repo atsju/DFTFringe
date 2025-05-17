@@ -1,7 +1,7 @@
 #include "showallcontoursdlg.h"
 #include "ui_showallcontoursdlg.h"
 #include <QSettings>
-#include <QDesktopWidget>
+//#include <QDesktopWidget>
 #include <QScreen>
 
 showAllContoursDlg::showAllContoursDlg( QWidget *parent) :

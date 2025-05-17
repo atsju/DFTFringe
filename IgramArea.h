@@ -73,9 +73,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "dftthumb.h"
 #include <QTimer>
-#include <QVideoWidget>
-#include <QMediaPlayer>
-#include <QMediaPlaylist>
+//#include <QVideoWidget>
+//#include <QMediaPlayer>
+//#include <QMediaPlaylist>
 #include <QScrollArea>
 #include "settingsigram.h"
 #include <QDockWidget>

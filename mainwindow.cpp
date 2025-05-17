@@ -17,6 +17,7 @@
 ****************************************************************************/
 #include "mainwindow.h" 
 #include "ui_mainwindow.h"
+#include "spdlog/spdlog.h"
 #include <QtWidgets>
 #include <iostream>
 #include <fstream>
@@ -47,7 +48,6 @@
 #include "utils.h"
 #include "colorchannel.h"
 #include "opencv2/opencv.hpp"
-#include "spdlog/spdlog.h"
 #include <QUrl>
 
 using namespace QtConcurrent;

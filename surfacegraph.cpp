@@ -36,7 +36,7 @@
 #include <QLabel>
 #include <QSettings>
 #include <QDebug>
-using namespace QtDataVisualization;
+//using namespace QtDataVisualization;
 
 int sampleCountX = 50;
 int sampleCountZ = 50;
