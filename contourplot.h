@@ -25,8 +25,10 @@
 #include "contourtools.h"
 #include "usercolormapdlg.h"
 #include "wavefront.h"
-# include <qwt_picker.h>
-# include <qwt_plot_picker.h>
+#include <qwt_picker.h>
+#include <qwt_plot_picker.h>
+#include <qwt_interval.h>
+
 class MyZoomer;
 class SpectrogramData: public QwtRasterData
 {
@@ -34,9 +36,14 @@ public:
     SpectrogramData();
     wavefront *m_wf;
     void setSurface(wavefront *surface);
+    QwtInterval interval(Qt::Axis axis) const override;
+    void setInterval(Qt::Axis axis, const QwtInterval &interval);
 
     virtual double value( double x, double y ) const;
 
+private:
+    QwtInterval m_xInterval;
+    QwtInterval m_yInterval;
 };
 class ContourPlot: public QwtPlot
 {

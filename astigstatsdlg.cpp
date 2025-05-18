@@ -12,6 +12,7 @@
 #include <qwt_interval_symbol.h>
 #include <qwt_plot_intervalcurve.h>
 #include <qwt_scale_engine.h>
+#include <qwt_scale_map.h>
 #include <qwt_plot_marker.h>
 #include <QDebug>
 #include <math.h>
