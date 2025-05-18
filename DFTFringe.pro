@@ -18,7 +18,7 @@ QT += charts concurrent core core5compat datavisualization gui network opengl wi
 
 qtHaveModule(printsupport): QT += printsupport
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 
 # disable qDebug() in release
 CONFIG( release, debug|release ) {
