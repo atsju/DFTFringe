@@ -33,9 +33,9 @@ win32 {
     message("Using WINDOWS project configuration.")
 
     CONFIG( debug, debug|release ) {
-        LIBS += -L..\qwt-6.1.6\lib -lqwtd # debug
+        LIBS += -L..\qwt-6.3.0\lib -lqwtd # debug
     } else {
-        LIBS += -L..\qwt-6.1.6\lib -lqwt # release
+        LIBS += -L..\qwt-6.3.0\lib -lqwt # release
         CONFIG+=force_debug_info # keep debug infos (even in release build) to be able to link stacktrace address to actual function
         CONFIG+=separate_debug_info # separate debug infos into a .exe.debug to not grow the .exe
     }
@@ -43,7 +43,7 @@ win32 {
     # NOTE: RC_FILE is Windows only, breaks Mac (and Linux?) builds if it in their scope.
     RC_FILE = DFTFringe.rc
 
-    INCLUDEPATH += ..\qwt-6.1.6\src
+    INCLUDEPATH += ..\qwt-6.3.0\src
     INCLUDEPATH += ..\build_armadillo\tmp\include
     INCLUDEPATH += ..\build_openCV\install\include
 
