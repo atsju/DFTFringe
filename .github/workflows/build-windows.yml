@@ -122,7 +122,7 @@ jobs:
           path: |
             qwt-${{env.QWT_version}}\src
             qwt-${{env.QWT_version}}\lib\*.dll
-          key: ${{ runner.os }}-QWT-${{env.QWT_version}}
+          key: ${{ runner.os }}-QWT-${{env.QWT_version}}-mingw${{env.mingw_version}}
 
       # all what follows is only run on cache miss
 
@@ -179,7 +179,7 @@ jobs:
             build_lapack\bin\liblapack.dll
             build_lapack\bin\libblas.dll
             build_armadillo\tmp\include
-          key: ${{ runner.os }}-lapack-${{env.lapack_version}}-armadillo-${{env.armadillo_version}}
+          key: ${{ runner.os }}-lapack-${{env.lapack_version}}-armadillo-${{env.armadillo_version}}-mingw${{env.mingw_version}}
 
       # all what follows is only run on cache miss
 
@@ -270,7 +270,7 @@ jobs:
             build_lapack\bin\liblapack.dll
             build_lapack\bin\libblas.dll
             build_armadillo\tmp\include
-          key: ${{ runner.os }}-lapack-${{env.lapack_version}}-armadillo-${{env.armadillo_version}}
+          key: ${{ runner.os }}-lapack-${{env.lapack_version}}-armadillo-${{env.armadillo_version}}-mingw${{env.mingw_version}}
           fail-on-cache-miss: true
       # restore cached QWT
       - uses: actions/cache/restore@v4
@@ -279,7 +279,7 @@ jobs:
           path: |
             qwt-${{env.QWT_version}}\src
             qwt-${{env.QWT_version}}\lib\*.dll
-          key: ${{ runner.os }}-QWT-${{env.QWT_version}}
+          key: ${{ runner.os }}-QWT-${{env.QWT_version}}-mingw${{env.mingw_version}}
           fail-on-cache-miss: true
       # restore cached openCV and QT
       - uses: actions/cache/restore@v4
