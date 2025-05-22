@@ -64,6 +64,7 @@ jobs:
             ${{env.QT_version}}\mingw_64\mkspecs\*
             ${{env.QT_version}}\mingw_64\plugins\platforms\*
             ${{env.QT_version}}\mingw_64\plugins\imageformats\*
+            ${{env.QT_version}}\mingw_64\translations\*
           key: ${{ runner.os }}-openCV-${{env.openCV_version}}-QT-${{env.QT_version}}
 
       # all what follows is only run on cache miss
@@ -294,6 +295,7 @@ jobs:
             ${{env.QT_version}}\mingw_64\mkspecs\*
             ${{env.QT_version}}\mingw_64\plugins\platforms\*
             ${{env.QT_version}}\mingw_64\plugins\imageformats\*
+            ${{env.QT_version}}\mingw_64\translations\*
           key: ${{ runner.os }}-openCV-${{env.openCV_version}}-QT-${{env.QT_version}}
           fail-on-cache-miss: true
 
