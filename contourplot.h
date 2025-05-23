@@ -44,6 +44,7 @@ public:
 private:
     QwtInterval m_xInterval;
     QwtInterval m_yInterval;
+    QwtInterval m_zInterval;
 };
 class ContourPlot: public QwtPlot
 {

@@ -42,6 +42,7 @@
 #include <qwt_plot_shapeitem.h>
 #include <QSettings>
 #include <qwt_picker_machine.h>
+#include "spdlog/spdlog.h"
 
 
 double zOffset = 0;
@@ -113,6 +114,8 @@ QwtInterval SpectrogramData::interval(Qt::Axis axis) const
             return m_xInterval;
         case Qt::YAxis:
             return m_yInterval;
+        case Qt::ZAxis:
+            return m_zInterval;
         default:
             return QwtInterval();
     }
@@ -127,6 +130,9 @@ void SpectrogramData::setInterval(Qt::Axis axis, const QwtInterval &interval)
             break;
         case Qt::YAxis:
             m_yInterval = interval;
+            break;
+        case Qt::ZAxis:
+            m_zInterval = interval;
             break;
         default:
             break;
