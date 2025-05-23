@@ -33,12 +33,20 @@ Additional information and help is availlable at https://groups.io/g/Interferome
 
 # How to build DFTFringe on Linux
 
-:skull: linux build is broken. Please use v7.x.x on linux
+
+We need to manually build Qwt as distributed library does not support Qt6
 
 ```
-sudo apt update
-sudo apt install -y apt-utils build-essential wget qt5-qmake qt5-qmake-bin qt5-assistant qtbase5-dev qtmultimedia5-dev libqt5charts5 libqt5charts5-dev libqt5multimedia* libqt5datavisualization5-dev libqt5datavisualization5 libopencv-core-dev libopencv-dev libqwt-qt5-6 libqwt-qt5-dev libarmadillo-dev
-qmake
+sudo apt update  
+sudo apt install -y apt-utils build-essential wget qt6-base-dev-tools qt6-declarative-dev qt6-multimedia-dev libqt6charts6-dev libqt6datavisualization6-dev libqt6svg6-dev libqt6core5compat6-dev libopencv-core-dev libopencv-dev libqwt-qt5-6 libqwt-qt5-dev libarmadillo-dev libgl1-mesa-dev libglu1-mesa-dev
+wget -O qwt-6.3.0.zip https://sourceforge.net/projects/qwt/files/qwt/6.3.0/qwt-6.3.0.zip/download?use_mirror=pilotfiber
+7z x qwt-6.3.0.zip
+cd qwt-6.3.0 
+/usr/lib/qt6/bin/qmake
+make -j4
+sudo make install
+cd ..
+/usr/lib/qt6/bin/qmake
 make -j4
 ```
 

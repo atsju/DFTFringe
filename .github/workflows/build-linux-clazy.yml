@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
   workflow_call:
 
+env:
+  QWT_version: 6.3.0
+
 jobs:
   build-linux-clazy:
     # This build is only done on one Linux version as it is here only to get the warnings from clazy.
