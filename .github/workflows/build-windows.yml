@@ -365,7 +365,7 @@ jobs:
           Copy-Item ".\DFTFringe\res\help" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\res\help" -Recurse
           Copy-Item ".\DFTFringe\RevisionHistory.html" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
       - name: automatically add QT dependencies with windeployqt
-        run: .\${{env.QT_version}}\mingw_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe
+        run: .\${{env.QT_version}}\mingw_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe --verbose 2
 
       - name: make installer using QT installer framework
         run: Tools\QtInstallerFramework\4.7\bin\binarycreator.exe -c DFTFringe\DFTFringeInstaller\config\config.xml -p DFTFringe\DFTFringeInstaller\packages DFTFringeInstaller_${{env.WORKFLOW_VERSION}}
