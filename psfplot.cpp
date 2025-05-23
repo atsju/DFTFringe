@@ -20,6 +20,7 @@
 #include <qwt_plot_curve.h>
 #include <qwt_plot_legenditem.h>
 #include <qwt_plot_textlabel.h>
+#include <qwt_text.h>
 #include <QPushButton>
 psfPlot::psfPlot(QWidget *parent) :
     QwtPlot(parent),
@@ -27,7 +28,7 @@ psfPlot::psfPlot(QWidget *parent) :
 {
     ui->setupUi(this);
     QwtPlotLegendItem *customLegend = new QwtPlotLegendItem();
-    customLegend->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
+    customLegend->setAlignmentInCanvas(Qt::AlignLeft | Qt::AlignBottom);
     customLegend->attach(this);
     QwtPlotTextLabel *t = new QwtPlotTextLabel();
     QwtText title( "PSF" );
