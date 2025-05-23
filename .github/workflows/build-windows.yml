@@ -62,6 +62,7 @@ jobs:
             ${{env.QT_version}}\mingw_64\include\*
             ${{env.QT_version}}\mingw_64\lib\*
             ${{env.QT_version}}\mingw_64\mkspecs\*
+            ${{env.QT_version}}\mingw_64\modules\*
             ${{env.QT_version}}\mingw_64\plugins\platforms\*
             ${{env.QT_version}}\mingw_64\plugins\imageformats\*
             ${{env.QT_version}}\mingw_64\translations\*
@@ -293,6 +294,7 @@ jobs:
             ${{env.QT_version}}\mingw_64\include\*
             ${{env.QT_version}}\mingw_64\lib\*
             ${{env.QT_version}}\mingw_64\mkspecs\*
+            ${{env.QT_version}}\mingw_64\modules\*
             ${{env.QT_version}}\mingw_64\plugins\platforms\*
             ${{env.QT_version}}\mingw_64\plugins\imageformats\*
             ${{env.QT_version}}\mingw_64\translations\*
@@ -365,7 +367,7 @@ jobs:
           Copy-Item ".\DFTFringe\res\help" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\res\help" -Recurse
           Copy-Item ".\DFTFringe\RevisionHistory.html" -Destination ".\DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data"
       - name: automatically add QT dependencies with windeployqt
-        run: .\${{env.QT_version}}\mingw_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe --verbose 2
+        run: .\${{env.QT_version}}\mingw_64\bin\windeployqt.exe DFTFringe\DFTFringeInstaller\packages\com.githubdoe.DFTFringe\data\DFTFringe.exe
 
       - name: make installer using QT installer framework
         run: Tools\QtInstallerFramework\4.7\bin\binarycreator.exe -c DFTFringe\DFTFringeInstaller\config\config.xml -p DFTFringe\DFTFringeInstaller\packages DFTFringeInstaller_${{env.WORKFLOW_VERSION}}
