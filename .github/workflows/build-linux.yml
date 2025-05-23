@@ -25,6 +25,7 @@ jobs:
       - run: 7z x qwt-${{env.QWT_version}}.zip
       - run: cd qwt-${{env.QWT_version}} ; /usr/lib/qt6/bin/qmake
       - run: cd qwt-${{env.QWT_version}} ; make -j4
+      - run: cd qwt-${{env.QWT_version}} ; sudo make install
       - run: /usr/lib/qt6/bin/qmake
       - uses: ammaraskar/gcc-problem-matcher@master
       - run: echo "::add-matcher::.github/matcher/uic_matcher.json"
