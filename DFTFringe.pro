@@ -67,7 +67,9 @@ unix: !mac {
     contains( CONFIG,debug ) { message("no extra debug libraries") }
 
     INCLUDEPATH += /usr/include/opencv4
-    INCLUDEPATH += /usr/include/qwt
+    INCLUDEPATH += /usr/local/qwt-6.3.0/include
+
+    QMAKE_RPATHDIR += /usr/local/qwt-6.3.0/lib
 
     LIBS += -larmadillo
     LIBS += -lGLU
@@ -77,8 +79,7 @@ unix: !mac {
     LIBS += -lopencv_highgui
     LIBS += -lopencv_imgcodecs
     LIBS += -lopencv_imgproc
-    LIBS += -lopencv_imgproc
-    LIBS += -lqwt-qt5
+    LIBS += -L/usr/local/qwt-6.3.0/lib -lqwt
 }
 
 # MAC ##############
