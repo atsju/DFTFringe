@@ -1,6 +1,5 @@
 #include "generatetargetdlg.h"
 #include "ui_generatetargetdlg.h"
-//#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QScreen>
 #include "opencv2/calib3d/calib3d.hpp"
@@ -21,8 +20,6 @@ generateTargetDlg::generateTargetDlg(QWidget *parent) :
     QScreen *screen = QGuiApplication::primaryScreen();
     m_dpix = screen->physicalDotsPerInchX();
     m_dpiy = screen->physicalDotsPerInchY();
-    //m_dpix = qApp->desktop()->physicalDpiX();
-    //m_dpiy = qApp->desktop()->physicalDpiY();
     ui->printerGroup->hide();
     QSettings set;
     ui->rows->setValue(set.value("target rows", 10).toInt());

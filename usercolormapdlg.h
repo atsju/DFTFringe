@@ -34,10 +34,6 @@ class SpectrogramData2: public QwtRasterData
 public:
     SpectrogramData2()
     {
-        //setInterval is virtual in QWT6.3.0 so we override interval
-        //setInterval( Qt::XAxis, QwtInterval( -5, 5 ) );
-        //setInterval( Qt::YAxis, QwtInterval( -5, 5 ) );
-        //setInterval( Qt::ZAxis, QwtInterval( -25, 25) );
     }
 
     QwtInterval interval(Qt::Axis axis) const override

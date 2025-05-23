@@ -209,7 +209,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QShortcut *shortcutl = new QShortcut(QKeySequence(Qt::Key_L), this);
     QObject::connect(shortcutl, SIGNAL(activated()), this, SLOT(on_actionLoad_Interferogram_triggered()));
 
-    QShortcut *shortcut1 = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_O), this);
+    QShortcut *shortcut1 = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_O), this);
     QObject::connect(shortcut1, SIGNAL(activated()), this, SLOT(on_actionLoad_Interferogram_triggered()));
 
     connect(m_dftTools,SIGNAL(doDFT()),m_dftArea,SLOT(doDFT()));

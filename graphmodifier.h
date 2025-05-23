@@ -41,7 +41,6 @@
 #include <QtCore/QPropertyAnimation>
 #include "percentCorrectionSurface.h"
 
-//using namespace QtDataVisualization;
 
 class GraphModifier : public QObject
 {
