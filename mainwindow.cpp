@@ -1265,7 +1265,7 @@ void MainWindow::batchProcess(QStringList fileList){
             if (batchIgramWizard::deletePreviousWave->isChecked()){
                 QVector<QString> zerns;
                 zerns << wf->name;
-                foreach(double v , wf->InputZerns){
+                for(const double &v : wf->InputZerns){
                     zerns << QString::number(v);
                 }
 
