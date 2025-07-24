@@ -211,7 +211,7 @@ void CanvasPicker::move( const QPoint &pos )
     plot()->replot();
     plotCanvas->setPaintAttribute( QwtPlotCanvas::ImmediatePaint, false );
 
-    emit(markerMoved());
+    emit markerMoved();
 }
 
 
