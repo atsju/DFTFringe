@@ -323,7 +323,7 @@ void foucaultView::on_makePb_clicked()
     //showData("rslit", ronchiSlit[0]);
 
 
-    dft(complexIn, FFT1,cv:: DFT_REAL_OUTPUT);
+    dft(complexIn, FFT1, cv::DFT_REAL_OUTPUT);
     shiftDFT(FFT1);
     dft(complexIn2, FFT2, cv::DFT_REAL_OUTPUT);
     shiftDFT(FFT2);
