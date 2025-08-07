@@ -29,4 +29,4 @@ jobs:
       # ignore noisy dirs from QT files itself
       # all level 1 checks but ignore clazy-no-connect-by-name
       # no parallel make with clazy to not mess log
-      - run: export CLAZY_IGNORE_DIRS=.*usr.* && export CLAZY_CHECKS="level2,no-connect-by-name" && make
+      - run: export CLAZY_IGNORE_DIRS=".*usr.*|.*bezier.*|.*boost.*|.*SingleApplication.*|.*spdlog.*" && export CLAZY_CHECKS="level2,no-connect-by-name" && make
