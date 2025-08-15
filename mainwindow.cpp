@@ -1374,7 +1374,7 @@ void MainWindow::startJitter(){
         else
             m_igramArea->m_center = saved;
 
-        m_igramArea->increase(rad);
+        m_igramArea->increaseValue(rad);
         m_igramArea->shiftoutline(QPointF(x,y));
         qApp->processEvents();
         QObject().thread()->msleep(1000);

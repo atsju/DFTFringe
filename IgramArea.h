@@ -169,7 +169,8 @@ public slots:
     void zoomIn();
     void zoomOut();
     void igramOutlineParmsChanged(const outlineParms &parms);
-    void increase( int i = 1);
+    void increaseValue(int);
+    void increase();
     void decrease();
     void zoomFull();
     void toggleHideOutline();
