@@ -145,7 +145,7 @@ signals:
     void progress(int);
     void diameterChanged(double);
     void rocChanged(double);
-    void nameChanged(QString, QString);
+    void nameChanged(const QString &, const QString &);
     void showTab(int);
     void enableControls(bool);
 private slots:

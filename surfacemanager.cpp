@@ -518,7 +518,7 @@ SurfaceManager::SurfaceManager(QObject *parent, surfaceAnalysisTools *tools,
     connect(m_surfaceTools, &surfaceAnalysisTools::surfaceSmoothGBEnabled, this, &SurfaceManager::surfaceSmoothGBEnabled);
     connect(m_surfaceTools, &surfaceAnalysisTools::surfaceSmoothGBValue, this, &SurfaceManager::surfaceSmoothGBValue);
     connect(m_surfaceTools, &surfaceAnalysisTools::wftNameChanged, this, &SurfaceManager::wftNameChanged);
-    connect(this, SIGNAL(nameChanged(QString, QString)), m_surfaceTools, SLOT(nameChanged(QString,QString)));
+    connect(this, &SurfaceManager::nameChanged, m_surfaceTools, &surfaceAnalysisTools::nameChanged);
     connect(m_metrics, &metricsDisplay::recomputeZerns, this, &SurfaceManager::computeZerns);
     connect(m_surfaceTools, &surfaceAnalysisTools::defocusChanged, this, &SurfaceManager::defocusChanged);
     connect(m_surfaceTools, &surfaceAnalysisTools::defocusSetup, this, &SurfaceManager::defocusSetup);

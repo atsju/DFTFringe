@@ -1388,7 +1388,7 @@ void MainWindow::startJitter(){
         wavefront *wf = m_surfaceManager->m_wavefronts[m_surfaceManager->m_currentNdx];
         wf->name = QString("x:_%1_Y:_%2_radius:_%3").arg(x).arg(y).arg(rad);
         dlg->status(wf->name);
-        m_surfTools->nameChanged(m_surfaceManager->m_currentNdx, wf->name);
+        m_surfTools->nameChangedN(m_surfaceManager->m_currentNdx, wf->name);
         qApp->processEvents();
         QObject().thread()->msleep(500);
     }
