@@ -1991,17 +1991,6 @@ void IgramArea::saveRegions(){
     set.setValue("lastRegions", text);
 }
 
-void IgramArea::createActions()
-{
-
-    fitToWindowAct = new QAction(tr("&Fit to Window"), this);
-    fitToWindowAct->setEnabled(false);
-    fitToWindowAct->setCheckable(true);
-    fitToWindowAct->setShortcut(tr("Ctrl+f"));
-    connect(fitToWindowAct, SIGNAL(triggered()), this, SLOT(fitToWindow()));
-
-}
-
 
 void IgramArea::crop() {
     // add current bounds to crop history.

@@ -202,7 +202,6 @@ private:
     QDockWidget *dock;
     void drawBoundary();
     void resizeImage();
-    void createActions();
     void zoom(int del, QPointF zoompt);
     bool modified;
     bool scribbling;
