@@ -159,7 +159,7 @@ private slots:
     void surfaceGenFinished();
     void backGroundUpdate();
     void deleteWaveFronts(QList<int> list);
-    void average(QList<int> list);
+    void averageWavefrontIndices(QList<int> list);
     void transfrom(const QList<int> &list);
     void filter();
     void saveAllContours();
