@@ -1809,7 +1809,7 @@ void SurfaceManager::subtractWavefronts(){
 
 void SurfaceManager::transfrom(const QList<int> &list){
     RotationDlg dlg(list);
-    connect(&dlg, SIGNAL(rotateTheseSig(double, QList<int>)), this, SLOT(rotateThese( double, QList<int>)));
+    connect(&dlg, &RotationDlg::rotateTheseSig, this, &SurfaceManager::rotateThese);
     dlg.exec();
 
 }
