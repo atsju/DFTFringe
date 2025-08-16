@@ -524,10 +524,10 @@ SurfaceManager::SurfaceManager(QObject *parent, surfaceAnalysisTools *tools,
     connect(m_surfaceTools, &surfaceAnalysisTools::defocusSetup, this, &SurfaceManager::defocusSetup);
     connect(this, &SurfaceManager::currentNdxChanged, m_surfaceTools, &surfaceAnalysisTools::currentNdxChanged);
     connect(this, &SurfaceManager::deleteWavefront, m_surfaceTools, &surfaceAnalysisTools::deleteWaveFront);
-    connect(m_surfaceTools, SIGNAL(deleteTheseWaveFronts(QList<int>)), this, SLOT(deleteWaveFronts(QList<int>)));
-    connect(m_surfaceTools, SIGNAL(average(QList<int>)),this, SLOT(average(QList<int>)));
-    connect(m_surfaceTools, SIGNAL(doxform(QList<int>)),this, SLOT(transfrom(QList<int>)));
-    connect(m_surfaceTools, SIGNAL(invert(QList<int>)),this,SLOT(invert(QList<int>)));
+    connect(m_surfaceTools, &surfaceAnalysisTools::deleteTheseWaveFronts, this, &SurfaceManager::deleteWaveFronts);
+    connect(m_surfaceTools, SIGNAL(average(QList<int>)),this, SLOT(average(QList<int>))); //TODO rename average
+    connect(m_surfaceTools, &surfaceAnalysisTools::doxform,this, &SurfaceManager::transfrom);
+    connect(m_surfaceTools, &surfaceAnalysisTools::invert,this,&SurfaceManager::invert);
     connect(m_surfaceTools, &surfaceAnalysisTools::filterWavefronts,this,&SurfaceManager::filter);
     connect(this, &SurfaceManager::enableControls,m_surfaceTools, &surfaceAnalysisTools::enableControls);
     connect(mirrorDlg::get_Instance(),&mirrorDlg::recomputeZerns, this, &SurfaceManager::computeZerns);
