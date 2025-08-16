@@ -179,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_dftArea, &DFTArea::newWavefront, m_surfaceManager, &SurfaceManager::createSurfaceFromPhaseMap);
     connect(m_surfaceManager, &SurfaceManager::diameterChanged,this,&MainWindow::diameterChanged);
     connect(m_surfaceManager, &SurfaceManager::showTab, ui->tabWidget, &QTabWidget::setCurrentIndex);
-    connect(m_surfTools, SIGNAL(updateSelected()), m_surfaceManager, SLOT(backGroundUpdate()));
+    connect(m_surfTools, SIGNAL(updateSelected()), m_surfaceManager, SLOT(backGroundUpdate())); //TODO test as SurfaceManager::backGroundUpdate is a private slot
     ui->tabWidget->addTab(review, "Results");
 
     ui->tabWidget->addTab(SimulationsView::getInstance(ui->tabWidget), "Star Test, PSF, MTF");
