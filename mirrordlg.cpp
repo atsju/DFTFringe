@@ -109,7 +109,7 @@ mirrorDlg::mirrorDlg(QWidget *parent) :
     ui->fringeSpacingEdit->blockSignals(false);
     m_outlineShape = (outlineShape)settings.value("outlineShape", CIRCLE).toInt();
     ui->minorAxisEdit->setText(QString::number(settings.value("ellipseMinorAxis", 50.).toDouble()));
-    connect(&spacingChangeTimer, SIGNAL(timeout()), this, SLOT(spacingChangeTimeout()));
+    connect(&spacingChangeTimer, &QTimer::timeout, this, &mirrorDlg::spacingChangeTimeout);
     if (m_verticalAxis == 0)
         m_verticalAxis = diameter;
     ui->ellipseShape->setChecked(m_outlineShape == ELLIPSE);
@@ -143,7 +143,7 @@ double mirrorDlg::getMinorAxis(){
 bool mirrorDlg::isEllipse(){
     return m_outlineShape == ELLIPSE;
 }
-void mirrorDlg::saveJson(QString fileName){
+void mirrorDlg::saveJson(const QString &fileName){
     QJsonObject jDoc, jMirror,jIgram, jEllipse, jAnnulus;
     jDoc["name"] = m_name;
     jDoc["show units in mm"] = mm;
@@ -598,7 +598,7 @@ void mirrorDlg::on_obs_textChanged(const QString &arg1)
     obs = ((mm) ? 1: 25.4) * arg1.toDouble();
 
 }
-void mirrorDlg::newLambda(QString v){
+void mirrorDlg::newLambda(const QString &v){
     ui->lambda->setText(v);
 }
 

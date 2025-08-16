@@ -86,13 +86,10 @@ signals:
     void setMinMaxValues(double,double);
     void setWaveRange(double);
     void newContourRange(double);
-    void sigPointSelected(const QPointF&);
+    void sigPointSelected(QPointF );
 
-public Q_SLOTS:
-  void selected(const QPointF& pos);
-
-
-public Q_SLOTS:
+public slots:
+    void selected(QPointF pos);
     void showContour( bool on );
     void showSpectrogram(bool on );
     void setAlpha( int );

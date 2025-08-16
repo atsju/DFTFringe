@@ -92,9 +92,9 @@ SimulationsView::SimulationsView(QWidget *parent) :
     ui->FFTSizeSB->blockSignals(false);
     ui->centerMagnifySB->setValue(set.value("StarTestMagnify", 4).toDouble());
     ui->gammaSB->setValue(set.value("StarTestGamma", 2.).toDouble());
-    connect(&m_guiTimer, SIGNAL(timeout()), this, SLOT(on_MakePB_clicked()));
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this,
-            SLOT(showContextMenu(QPoint)));
+    connect(&m_guiTimer, &QTimer::timeout, this, &SimulationsView::on_MakePB_clicked);
+    connect(this, &QWidget::customContextMenuRequested, this,
+            &SimulationsView::showContextMenu);
     setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
@@ -159,14 +159,14 @@ void SimulationsView::saveImage(QString fileName){
     svImage.save(fileName);
 }
 
-void SimulationsView::showContextMenu(const QPoint &pos)
+void SimulationsView::showContextMenu(QPoint pos)
 {
 
 // Handle global position
     QPoint globalPos = mapToGlobal(pos);
     // Create menu and insert some actions
     QMenu myMenu;
-    myMenu.addAction("Save as image",  this, SLOT(saveImage()));
+    myMenu.addAction("Save as image",  this, SLOT(saveImage())); //TODO test current code as signature of saveImage(QString fileName) doesn't match QAction::triggered(bool checked = false)
 
     // Show context menu at handling position
     myMenu.exec(globalPos);
@@ -455,7 +455,7 @@ void etoxplusy(cv::Mat data)
         }
     }
 }
-void SimulationsView::mtf(cv::Mat star, QString txt, QColor color){
+void SimulationsView::mtf(const cv::Mat &star, const QString &txt, QColor color){
     cv::Mat planes[2];
     cv::Mat mtfIn, mtfOut, mtfMag;
     split(star,planes);
@@ -517,7 +517,7 @@ int stalkWidth;
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 using namespace cv;
-cv::Mat make_obstructionMask(cv::Mat mask){
+cv::Mat make_obstructionMask(const cv::Mat &mask){
     //return;
     cv::Mat out = mask.clone();
     int s = mask.size[0];
@@ -533,7 +533,7 @@ cv::Mat make_obstructionMask(cv::Mat mask){
 
 
 //3D psf
-void SimulationsView::make3DPsf(cv::Mat surface){
+void SimulationsView::make3DPsf(const cv::Mat &surface){
 
     int nx = surface.size[0];
     int start = nx/2 - nx/4;

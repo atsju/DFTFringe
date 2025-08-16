@@ -378,7 +378,7 @@ void ContourPlot::ruler(){
     }
 }
 
-void ContourPlot::selected(const QPointF& pos){
+void ContourPlot::selected(QPointF pos){
     if (m_wf==0)
         return;
 
@@ -492,8 +492,7 @@ ContourPlot::ContourPlot( QWidget *parent, ContourTools *tools, bool minimal ):
     tracker_ = new MyZoomer(this->canvas(), this);
 
 
-    connect(picker_, SIGNAL(selected(const QPointF&)),
-            SLOT(selected(const QPointF&)));
+    connect(picker_, QOverload<const QPointF&>::of(&QwtPlotPicker::selected), this, &ContourPlot::selected);
 
     QSettings settings;
     m_colorMapNdx = settings.value("colorMapType",0).toInt();
