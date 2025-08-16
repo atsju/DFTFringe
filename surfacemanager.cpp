@@ -3057,10 +3057,10 @@ void SurfaceManager::transform(){
         return;
     }
     TransformWaveFrontDlg dlg;
-    connect(&dlg, SIGNAL(flipLR()), this, SLOT(flipHorizontal()));
-    connect(&dlg, SIGNAL(flipV()),this,   SLOT(flipVertical()));
+    connect(&dlg, &TransformWaveFrontDlg::flipLR, this, QOverload<>::of(&SurfaceManager::flipHorizontal));
+    connect(&dlg, &TransformWaveFrontDlg::flipV, this,  QOverload<>::of(&SurfaceManager::flipVertical));
     connect(&dlg, &TransformWaveFrontDlg::resizeW, this, &SurfaceManager::resizeW);
-    connect(&dlg, SIGNAL(changeWavelength(double)), this, SLOT(changeWavelength(double)));
+    connect(&dlg, &TransformWaveFrontDlg::changeWavelength, this, QOverload<double>::of(&SurfaceManager::changeWavelength));
 
     dlg.exec();
 }
