@@ -31,6 +31,7 @@ SOURCES += main.cpp \
     arbitrarywavefronthelp.cpp \
     arbitrarywavwidget.cpp \
     astigpolargraph.cpp \
+	autoinvertdlg.cpp \
     cpoint.cpp \
     defocusdlg.cpp \
     edgeplot.cpp \
@@ -46,8 +47,8 @@ SOURCES += main.cpp \
     percentcorrectiondlg.cpp \
     profileplot.cpp \
     profileplotpicker.cpp \
-    psiresizeimagesdlg.cpp \
     settingsigramimportconfig.cpp \
+    startestmoviedlg.cpp \
     surface3dcontrolsdlg.cpp \
     surfacegraph.cpp \
     surfacelightingproxy.cpp \
@@ -65,10 +66,8 @@ SOURCES += main.cpp \
     zernikes.cpp \
     metricsdisplay.cpp \
     reviewwindow.cpp \
-    wavefrontloader.cpp \
     rotationdlg.cpp \
     wftstats.cpp \
-    surfacepropertiesdlg.cpp \
     imagehisto.cpp \
     colorchanneldisplay.cpp \
     intensityplot.cpp \
@@ -78,7 +77,6 @@ SOURCES += main.cpp \
     simigramdlg.cpp \
     punwrap.cpp \
     wftexaminer.cpp \
-    savewavedlg.cpp \
     usercolormapdlg.cpp \
     colormapviewerdlg.cpp \
     oglview.cpp \
@@ -91,7 +89,6 @@ SOURCES += main.cpp \
     psfplot.cpp \
     standastigwizard.cpp \
     counterrotationdlg.cpp \
-    renamewavefrontdlg.cpp \
     subtractwavefronatsdlg.cpp \
     helpdlg.cpp \
     settingsprofile.cpp \
@@ -102,7 +99,6 @@ SOURCES += main.cpp \
     nullvariationdlg.cpp \
     ccswappeddlg.cpp \
     foucaultview.cpp \
-    squareimage.cpp \
     bathastigdlg.cpp \
     zernikeeditdlg.cpp \
     settingsGeneral2.cpp \
@@ -114,22 +110,19 @@ SOURCES += main.cpp \
     generatetargetdlg.cpp \
     lensetablemodel.cpp \
     unwraperrorsview.cpp \
-    lensdialog.cpp \
     messagereceiver.cpp \
     myutils.cpp \
     pixelstats.cpp \
-    utilil.cpp \
+    utils.cpp \
     circlefit.cpp \
     astigstatsdlg.cpp \
     averagewavefrontfilesdlg.cpp \
-    astigzoomer.cpp \
     astigscatterplot.cpp \
     wavefrontfilterdlg.cpp \
     myplotpicker.cpp \
     rmsplot.cpp \
     regionedittools.cpp \
     reportdlg.cpp \
-    videosetupdlg.cpp \
     showaliasdlg.cpp \
     colorchannel.cpp \
     wavefrontaveragefilterdlg.cpp \
@@ -154,6 +147,7 @@ HEADERS  += mainwindow.h \
     arbitrarywavefronthelp.h \
     arbitrarywavwidget.h \
     astigpolargraph.h \
+	autoinvertdlg.h \
     cpoint.h \
     defocusdlg.h \
     edgeplot.h \
@@ -169,8 +163,8 @@ HEADERS  += mainwindow.h \
     percentcorrectiondlg.h \
     profileplot.h \
     profileplotpicker.h \
-    psiresizeimagesdlg.h \
     settingsigramimportconfig.h \
+    startestmoviedlg.h \
     surface3dcontrolsdlg.h \
     surfacegraph.h \
     surfacelightingproxy.h \
@@ -188,11 +182,8 @@ HEADERS  += mainwindow.h \
     zernikes.h \
     metricsdisplay.h \
     reviewwindow.h \
-    vortex.h \
-    wavefrontloader.h \
     rotationdlg.h \
     wftstats.h \
-    surfacepropertiesdlg.h \
     punwrap.h \
     imagehisto.h \
     colorchanneldisplay.h \
@@ -202,7 +193,6 @@ HEADERS  += mainwindow.h \
     vortexdebug.h \
     simigramdlg.h \
     wftexaminer.h \
-    savewavedlg.h \
     usercolormapdlg.h \
     colormapviewerdlg.h \
     oglview.h \
@@ -215,7 +205,6 @@ HEADERS  += mainwindow.h \
     psfplot.h \
     standastigwizard.h \
     counterrotationdlg.h \
-    renamewavefrontdlg.h \
     subtractwavefronatsdlg.h \
     helpdlg.h \
     settingsprofile.h \
@@ -226,7 +215,6 @@ HEADERS  += mainwindow.h \
     nullvariationdlg.h \
     ccswappeddlg.h \
     foucaultview.h \
-    squareimage.h \
     bathastigdlg.h \
     zernikeeditdlg.h \
     settingsGeneral2.h \
@@ -238,7 +226,6 @@ HEADERS  += mainwindow.h \
     generatetargetdlg.h \
     lensetablemodel.h \
     unwraperrorsview.h \
-    lensdialog.h \
     messagereceiver.h \
     myutils.h \
     pixelstats.h \
@@ -247,14 +234,12 @@ HEADERS  += mainwindow.h \
     circle.h \
     astigstatsdlg.h \
     averagewavefrontfilesdlg.h \
-    astigzoomer.h \
     astigscatterplot.h \
     wavefrontfilterdlg.h \
     myplotpicker.h \
     rmsplot.h \
     regionedittools.h \
     reportdlg.h \
-    videosetupdlg.h \
     showaliasdlg.h \
     colorchannel.h \
     wavefrontaveragefilterdlg.h \
@@ -281,6 +266,7 @@ FORMS    += mainwindow.ui \
     annulushelpdlg.ui \
     arbitrarywavefronthelp.ui \
     astigpolargraph.ui \
+	autoinvertdlg.ui \
     defocusdlg.ui \
     dfttools.ui \
     dftarea.ui \
@@ -289,28 +275,24 @@ FORMS    += mainwindow.ui \
     oglrendered.ui \
     pdfcalibrationdlg.ui \
     percentcorrectiondlg.ui \
-    profilearea.ui \
     profileplot.ui \
     contourtools.ui \
-    psiresizeimagesdlg.ui \
     settingsigramimportconfig.ui \
+    startestmoviedlg.ui \
     surface3dcontrolsdlg.ui \
     surfaceanalysistools.ui \
     metricsdisplay.ui \
     userdrawnprofiledlg.ui \
     zernikedlg.ui \
     mirrordlg.ui \
-    wavefrontnulldlg.ui \
     reviewwindow.ui \
     rotationdlg.ui \
-    surfacepropertiesdlg.ui \
     colorchanneldisplay.ui \
     igramintensity.ui \
     dftthumb.ui \
     vortexdebug.ui \
     simigramdlg.ui \
     wftexaminer.ui \
-    savewavedlg.ui \
     usercolormapdlg.ui \
     colormapviewerdlg.ui \
     settingsigram.ui \
@@ -322,7 +304,6 @@ FORMS    += mainwindow.ui \
     psfplot.ui \
     standastigwizard.ui \
     counterrotationdlg.ui \
-    renamewavefrontdlg.ui \
     subtractwavefronatsdlg.ui \
     helpdlg.ui \
     settingsprofile.ui \
@@ -342,14 +323,12 @@ FORMS    += mainwindow.ui \
     camcalibrationreviewdlg.ui \
     generatetargetdlg.ui \
     unwraperrorsview.ui \
-    lensdialog.ui \
     pixelstats.ui \
     astigstatsdlg.ui \
     averagewavefrontfilesdlg.ui \
     wavefrontfilterdlg.ui \
     regionedittools.ui \
     reportdlg.ui \
-    videosetupdlg.ui \
     showaliasdlg.ui \
     wavefrontaveragefilterdlg.ui \
     rejectedwavefrontsdlg.ui \
@@ -387,7 +366,6 @@ LIBS += D:\opencv\opencv-3.4.12\build\bin\libopencv_imgcodecs3412.dll
 LIBS += D:\opencv\opencv-3.4.12\build\bin\libopencv_imgproc3412.dll
 LIBS += D:\opencv\opencv-3.4.12\build\bin\libopencv_features2d3412.dll
 LIBS += D:\opencv\opencv-3.4.12\build\bin\libopencv_calib3d3412.dll
-
 
 #LIBS += D:\armadillo\bin\libarmadillo.dll
 LIBS += D:\lapack\build64\bin\liblapack.dll
@@ -432,7 +410,6 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 DEFINES += DALE_DO_NOT_LOG
 DISTFILES += \
     buildingDFTFringe64.txt \
-    helptext.txt \
     ColorMaps/Dale1.cmp \
     ColorMaps/Dale2.cmp \
     ColorMaps/Dale3.cmp \

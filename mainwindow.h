@@ -35,7 +35,6 @@
 #include "metricsdisplay.h"
 #include "reviewwindow.h"
 #include "settings2.h"
-#include "wavefrontloader.h"
 #include "colorchanneldisplay.h"
 #include "igramintensity.h"
 #include "vortexdebug.h"
@@ -274,6 +273,8 @@ private slots:
     void on_actionastig_in_polar_triggered();
 
     void on_actionStop_auto_invert_triggered();
+
+    void load_from_url();
 
 private:
 

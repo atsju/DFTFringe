@@ -25,7 +25,6 @@
 #include <QtAlgorithms>
 #include <QLineEdit>
 #include "mirrordlg.h"
-#include "renamewavefrontdlg.h"
 #include <QMessageBox>
 surfaceAnalysisTools *surfaceAnalysisTools::m_Instance = NULL;
 
@@ -357,3 +356,6 @@ void surfaceAnalysisTools::closeDefocus(int /*result*/){
     m_defocus = 0.;
     emit defocusChanged();
 }
+
+
+
